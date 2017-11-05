@@ -1,0 +1,29 @@
+﻿<mat-card>
+  <form class="github-form">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Github user" value="google" [(ngModel)]="githubUserName" name="githubUser">
+
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Level" type="number" value="3" [(ngModel)]="maxLevels" name="maxLevels">
+
+    </mat-form-field>
+    <button mat-button (click)="getGithubAccountFollowers(githubUserName, 0, followersTree)" [disabled]="!githubUserName">Get Followers</button>
+  </form>
+</mat-card>
+
+<mat-card *ngIf="followers.length > 4 && errorMessage === ''">
+  <h3>Followers for User {{githubUserName}}</h3>
+  <div style="overflow-wrap: break-word;">
+    <pre>
+          {{followers | json}}
+        </pre>
+  </div>
+  <button mat-button (click)="reset()">Reset</button>
+</mat-card>
+
+
+<mat-card *ngIf="errorMessage != ''">
+  <h1>Error occurred</h1>
+  {{errorMessage}}
+</mat-card>

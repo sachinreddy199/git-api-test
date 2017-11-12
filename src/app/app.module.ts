@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 
 import { MatButtonModule, MatInputModule, MatFormFieldModule, MatListModule, MatCardModule, MatMenuModule  } from '@angular/material';
 
+import {APP_CONFIG, APP_CONFIG_VALUES} from './app.config';
 import { AppComponent } from './app.component';
 import { GitHubComponent } from './github/github.component';
 import { GitHubService } from './service/github.service';
@@ -32,7 +33,11 @@ export const routes = [
       RouterModule.forRoot(routes, { enableTracing: false }),
       MatButtonModule, MatInputModule, MatFormFieldModule, MatListModule, MatCardModule, MatMenuModule
   ],
-  providers: [GitHubService],
+  providers: [
+      {
+        provide: APP_CONFIG, useValue: APP_CONFIG_VALUES
+      },
+      GitHubService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
